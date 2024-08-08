@@ -1,0 +1,31 @@
+syntax="proto3";
+
+option go_package="github.com/zhetkerbaevan/library-microservice/services/common/books";
+
+service BookService{
+    rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {}
+}
+
+message Book {
+    int32 Id = 1;
+    string Name = 2;
+    string Author = 3;
+    string Genre = 4;
+}
+
+message CreateBookRequest {
+    int32 id = 1;
+    string name = 2;
+    string author = 3;
+    string genre = 4;
+}
+
+message CreateBookResponse {
+    string status = 1;
+}
+
+message GetBooksRequest{}
+
+message GetBooksResponse {
+    repeated Book books = 1;
+}
