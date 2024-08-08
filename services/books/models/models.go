@@ -8,4 +8,5 @@ import (
 
 type BookService interface {
 	CreateBook(context.Context, *books.Book) error
+	GetBooks(context.Context) []*books.Book
 }

@@ -25,10 +25,10 @@ func NewGRPCHandler(grpc *grpc.Server, bookService models.BookService) {
 // Implementation of RPC methods
 func (h *BooksGRPCHandler) CreateBook(ctx context.Context, req *books.CreateBookRequest) (*books.CreateBookResponse, error) {
 	book := &books.Book{ //Get Payload
-		Id:     1,
-		Name:   "Sapiens",
-		Author: "Yuval Noah Harari",
-		Genre:  "Non-fiction",
+		Id:     req.Id,
+		Name:   req.Name,
+		Author: req.Author,
+		Genre:  req.Genre,
 	}
 
 	err := h.bookService.CreateBook(ctx, book) //Send payload to service
@@ -40,5 +40,13 @@ func (h *BooksGRPCHandler) CreateBook(ctx context.Context, req *books.CreateBook
 		Status: "Created",
 	}
 
+	return res, nil
+}
+
+func (h *BooksGRPCHandler) GetBooks(ctx context.Context, req *books.GetBooksRequest) (*books.GetBooksResponse, error) {
+	bs := h.bookService.GetBooks(ctx)
+	res := &books.GetBooksResponse{
+		Books: bs,
+	}
 	return res, nil
 }

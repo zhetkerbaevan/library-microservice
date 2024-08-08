@@ -21,3 +21,7 @@ func (s *BookService) CreateBook(ctx context.Context, book *books.Book) error {
 	booksDB = append(booksDB, book)
 	return nil
 }
+
+func (s *BookService) GetBooks(ctx context.Context) []*books.Book {
+	return booksDB
+}

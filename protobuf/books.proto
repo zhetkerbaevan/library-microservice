@@ -4,6 +4,7 @@ option go_package="github.com/zhetkerbaevan/library-microservice/services/common
 
 service BookService{
     rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {}
+    rpc GetBooks(GetBooksRequest) returns (GetBooksResponse) {}
 }
 
 message Book {
