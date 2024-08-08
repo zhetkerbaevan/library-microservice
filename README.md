@@ -17,5 +17,5 @@ make run-books
 make run-library
 ```
 ## API Endpoints
-POST /book - Create a new book.
+POST /book - Create a new book.  
 GET / - Get all books
