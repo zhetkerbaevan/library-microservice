@@ -11,11 +11,20 @@ cd library-microservice
  ```sh
 go mod tidy
 ```
+3. Database Configuration  
+* Set up MongoDB database    
+* Configure connection details in .env  
+* Start docker container  
+```sh
+make up
+```  
 3. Start applications
  ```sh
 make run-books
 make run-library
 ```
 ## API Endpoints
-POST /book - Create a new book.  
-GET / - Get all books
+GET / - Get all books  
+POST /book - Create a new book  
+PUT /update/book/{id} - Update a book  
+DELETE /delete/book/{id} - Delete a book by id  
