@@ -19,6 +19,7 @@ go mod tidy
 make up
 ```  
 3. Start applications
+Split terminal and run commands  
  ```sh
 make run-books
 make run-library
