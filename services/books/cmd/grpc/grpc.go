@@ -6,6 +6,7 @@ import (
 
 	"github.com/zhetkerbaevan/library-microservice/services/books/handler"
 	"github.com/zhetkerbaevan/library-microservice/services/books/service"
+	"github.com/zhetkerbaevan/library-microservice/services/books/store"
 	"google.golang.org/grpc"
 )
 
@@ -26,8 +27,9 @@ func (s *GRPCServer) Run() error {
 
 	grpcServer := grpc.NewServer()
 
+	bookStore := store.NewBookStore()
 	//Register gRPC services
-	bookService := service.NewBookService()
+	bookService := service.NewBookService(bookStore)
 	handler.NewGRPCHandler(grpcServer, bookService)
 
 	log.Println("Starting gRPC server on", s.addr)

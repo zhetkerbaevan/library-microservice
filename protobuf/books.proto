@@ -5,23 +5,43 @@ option go_package="github.com/zhetkerbaevan/library-microservice/services/common
 service BookService{
     rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {}
     rpc GetBooks(GetBooksRequest) returns (GetBooksResponse) {}
+    rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse) {}
+    rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse) {}
 }
 
 message Book {
-    int32 Id = 1;
+    string Id = 1;
     string Name = 2;
     string Author = 3;
     string Genre = 4;
 }
 
 message CreateBookRequest {
-    int32 id = 1;
     string name = 2;
     string author = 3;
     string genre = 4;
 }
 
 message CreateBookResponse {
+    string status = 1;
+}
+
+message DeleteBookRequest {
+    string id = 1;
+}
+
+message DeleteBookResponse {
+    string status = 1;
+}
+
+message UpdateBookRequest {
+    string id = 1;
+    string name = 2;
+    string author = 3;
+    string genre = 4;
+}
+
+message UpdateBookResponse {
     string status = 1;
 }
 
