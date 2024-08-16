@@ -70,25 +70,30 @@ func (s *BookStore) DeleteBook(id string) error {
 
 func (s *BookStore) UpdateBook(book models.MongoBook) error {
 	collection := db.ReturnCollectionPointer()
-
-	// Define the filter to locate the specific book by its _id.
 	filter := bson.D{{"_id", book.ID}}
+	update := bson.D{}
 
-	// Define the update. The `$set` operator replaces the fields with the new values.
-	update := bson.D{
-		{"$set", bson.D{
-			{"name", book.Name},
-			{"author", book.Author},
-			{"genre", book.Genre},
-		}},
+	if book.Name != "" {
+		update = append(update, bson.E{"name", book.Name})
+	}
+	if book.Author != "" {
+		update = append(update, bson.E{"author", book.Author})
+	}
+	if book.Genre != "" {
+		update = append(update, bson.E{"genre", book.Genre})
 	}
 
-	// Perform the update operation
+	if len(update) == 0 {
+		return nil
+	}
+
+	update = bson.D{{"$set", update}}
 	updRes, err := collection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
 		fmt.Println("error from store", err)
 		return err
 	}
+
 	fmt.Println("updRes:", updRes)
 
 	return nil
